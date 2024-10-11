@@ -48,6 +48,7 @@ public class CommentService {
     }
 
     public List<CommentResponse> getComments(long todoId) {
+        // 수정된 부분: fetch join을 사용한 레포지토리 메서드 호출(7단계)
         List<Comment> commentList = commentRepository.findByTodoIdWithUser(todoId);
 
         List<CommentResponse> dtoList = new ArrayList<>();

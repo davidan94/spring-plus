@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -18,7 +19,8 @@ public class AdminAccessLoggingAspect {
 
     private final HttpServletRequest request;
 
-    @After("execution(* org.example.expert.domain.user.controller.UserController.getUser(..))")
+    // Before advice로 변경하고, UserAdminController의 changeUserRole 메소드에 대한 포인트컷 설정(3단계)
+    @Before("execution(* org.example.expert.domain.user.controller.UserAdminController.changeUserRole(..))")
     public void logAfterChangeUserRole(JoinPoint joinPoint) {
         String userId = String.valueOf(request.getAttribute("userId"));
         String requestUrl = request.getRequestURI();

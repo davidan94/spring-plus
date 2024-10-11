@@ -69,9 +69,9 @@ class TodoControllerTest {
 
         // then
         mockMvc.perform(get("/todos/{todoId}", todoId))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value(HttpStatus.OK.name()))
-                .andExpect(jsonPath("$.code").value(HttpStatus.OK.value()))
+                .andExpect(status().isNotFound())  // 404 Not Found로 상태 코드 수정(4단계)
+                .andExpect(jsonPath("$.status").value(HttpStatus.NOT_FOUND.name()))  // OK -> NOT_FOUND로 수정(4단계)
+                .andExpect(jsonPath("$.code").value(HttpStatus.NOT_FOUND.value()))  // OK -> NOT_FOUND로 수정(4단계)
                 .andExpect(jsonPath("$.message").value("Todo not found"));
     }
 }
